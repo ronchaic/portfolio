@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ronald Patrick Galinato</title>
+  <meta name="description" content="IT and Cybersecurity Engineer with 13 years across IT infrastructure and security operations — SIEM/XDR, detection engineering, incident response.">
+  <meta property="og:title" content="Ronald Patrick Galinato">
+  <meta property="og:description" content="IT and Cybersecurity Engineer | Security Operations — Pasig City, Metro Manila.">
+  <meta property="og:type" content="website">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* ── TOKENS ── */
+    :root {
+      --bg:          #F2F5FA;
+      --bg-subtle:   #E9EDF5;
+      --surface:     #FFFFFF;
+      --ink:         #0F1E36;
+      --ink-2:       #2E405A;
+      --mist:        #7B8EAC;
+      --border:      #CED7E6;
+      --accent:      #3A6CF0;
+      --accent-warm: #FF6B52;
+      --accent-dim:  rgba(58, 108, 240, 0.1);
+
+      --f-display: 'Fraunces', Georgia, serif;
+      --f-body:    'Outfit', system-ui, sans-serif;
+      --f-mono:    'JetBrains Mono', 'Courier New', monospace;
+
+      --w: 1080px;
+      --px: clamp(1.25rem, 5vw, 3rem);
+      --section: clamp(4.5rem, 10vw, 8rem);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg:          #0A1628;
+        --bg-subtle:   #0F1D38;
+        --surface:     #111D36;
+        --ink:         #EDF1FA;
+        --ink-2:       #B8C9E2;
+        --mist:        #5B7090;
+        --border:      #1C2E4A;
+        --accent:      #5B8AF0;
+        --accent-warm: #FF7557;
+        --accent-dim:  rgba(91, 138, 240, 0.14);
+      }
+    }
+
+    :root[data-theme="dark"] {
+      --bg:          #0A1628;
+      --bg-subtle:   #0F1D38;
+      --surface:     #111D36;
+      --ink:         #EDF1FA;
+      --ink-2:       #B8C9E2;
+      --mist:        #5B7090;
+      --border:      #1C2E4A;
+      --accent:      #5B8AF0;
+      --accent-warm: #FF7557;
+      --accent-dim:  rgba(91, 138, 240, 0.14);
+    }
+
+    /* ── RESET ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--f-body);
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.7;
+      font-size: 1rem;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── LAYOUT ── */
+    .wrap {
+      max-width: var(--w);
+      margin-inline: auto;
+      padding-inline: var(--px);
+    }
+
+    /* ── NAV ── */
+    #nav {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 100;
+      padding: 1.2rem 0;
+      background: var(--bg);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s, background 0.3s;
+    }
+    #nav.scrolled {
+      border-bottom-color: var(--border);
+      background: color-mix(in srgb, var(--bg) 88%, transparent);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+    .nav-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .nav-logo {
+      font-family: var(--f-display);
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--mist);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+    .nav-cta {
+      font-size: 0.8125rem;
+      font-weight: 500;
+      padding: 0.45rem 1.1rem;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      color: var(--ink-2);
+      transition: border-color 0.2s, color 0.2s;
+      white-space: nowrap;
+    }
+    .nav-cta:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding-bottom: clamp(3rem, 8vw, 5.5rem);
+      padding-top: 6rem;
+    }
+    .hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--f-mono);
+      font-size: 0.72rem;
+      color: var(--mist);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 1.75rem;
+    }
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #3BC47A;
+      animation: blink 2.4s ease-in-out infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.35; }
+    }
+    .hero-name {
+      font-family: var(--f-display);
+      font-size: clamp(3rem, 9.5vw, 8rem);
+      font-weight: 700;
+      line-height: 0.93;
+      letter-spacing: -0.035em;
+      color: var(--ink);
+      font-optical-sizing: auto;
+      margin-bottom: 2.5rem;
+    }
+    .hero-name em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    .hero-foot {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .hero-role {
+      font-size: clamp(0.9375rem, 2vw, 1.125rem);
+      color: var(--ink-2);
+      max-width: 480px;
+      line-height: 1.55;
+    }
+    .hero-role strong { color: var(--ink); font-weight: 600; }
+    .hero-meta {
+      font-family: var(--f-mono);
+      font-size: 0.72rem;
+      color: var(--mist);
+      line-height: 1.9;
+      text-align: right;
+    }
+
+    /* ── SECTION CHROME ── */
+    section { padding-block: var(--section); }
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-family: var(--f-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: var(--mist);
+      margin-bottom: 3rem;
+    }
+    .section-label::after {
+      content: '';
+      width: 60px;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: clamp(2.5rem, 7vw, 5.5rem);
+      align-items: start;
+    }
+    .about-lead {
+      font-size: clamp(1.0625rem, 2vw, 1.2rem);
+      color: var(--ink);
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+      max-width: 52ch;
+    }
+    .about-body {
+      font-size: 0.9375rem;
+      color: var(--ink-2);
+      line-height: 1.75;
+      max-width: 54ch;
+    }
+    .about-body + .about-body { margin-top: 1rem; }
+    .aside-group { margin-bottom: 1.75rem; }
+    .aside-label {
+      font-family: var(--f-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mist);
+      margin-bottom: 0.6rem;
+    }
+    .aside-value {
+      font-size: 0.9rem;
+      color: var(--ink-2);
+      line-height: 1.8;
+    }
+    .cert-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .cert-item {
+      font-size: 0.875rem;
+      color: var(--ink-2);
+      line-height: 1.4;
+    }
+    .cert-item span {
+      display: block;
+      font-family: var(--f-mono);
+      font-size: 0.65rem;
+      color: var(--mist);
+      margin-top: 0.1rem;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── EXPERIENCE ── */
+    .exp-item {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 3rem;
+      padding: 2.5rem 0;
+      border-top: 1px solid var(--border);
+    }
+    .exp-item:last-child { border-bottom: 1px solid var(--border); }
+    .exp-period {
+      font-family: var(--f-mono);
+      font-size: 0.72rem;
+      color: var(--mist);
+      line-height: 1.7;
+      padding-top: 0.15rem;
+    }
+    .exp-co {
+      font-family: var(--f-mono);
+      font-size: 0.68rem;
+      color: var(--accent);
+      font-weight: 500;
+      margin-top: 0.4rem;
+      letter-spacing: 0.04em;
+    }
+    .exp-title {
+      font-family: var(--f-display);
+      font-size: 1.25rem;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      color: var(--ink);
+      margin-bottom: 0.6rem;
+    }
+    .exp-desc {
+      font-size: 0.9375rem;
+      color: var(--ink-2);
+      line-height: 1.7;
+      max-width: 58ch;
+    }
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-top: 1.25rem;
+    }
+    .tag {
+      font-family: var(--f-mono);
+      font-size: 0.68rem;
+      padding: 0.28rem 0.65rem;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      color: var(--mist);
+      letter-spacing: 0.03em;
+    }
+
+    /* ── PROJECTS ── */
+    .proj-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      background: var(--border);
+      outline: 2px solid var(--border);
+    }
+    .proj-card {
+      background: var(--bg);
+      padding: clamp(1.75rem, 4vw, 2.75rem);
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      transition: background 0.18s;
+    }
+    .proj-card:hover { background: var(--bg-subtle); }
+    .proj-num {
+      font-family: var(--f-mono);
+      font-size: 0.68rem;
+      color: var(--mist);
+      letter-spacing: 0.08em;
+    }
+    .proj-title {
+      font-family: var(--f-display);
+      font-size: 1.375rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      color: var(--ink);
+    }
+    .proj-desc {
+      font-size: 0.875rem;
+      color: var(--ink-2);
+      line-height: 1.65;
+      flex: 1;
+    }
+    .proj-foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 0.25rem;
+    }
+    .proj-link {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--accent);
+      transition: letter-spacing 0.2s;
+    }
+    .proj-card:hover .proj-link { letter-spacing: 0.02em; }
+    .proj-stack {
+      font-family: var(--f-mono);
+      font-size: 0.66rem;
+      color: var(--mist);
+    }
+
+    /* ── SKILLS ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3rem;
+    }
+    .skill-group h4 {
+      font-family: var(--f-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+      color: var(--mist);
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .skill-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+    .skill-item {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      font-size: 0.9375rem;
+      color: var(--ink-2);
+    }
+    .skill-item::before {
+      content: '';
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    /* ── CONTACT ── */
+    #contact { border-top: 1px solid var(--border); }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 4rem;
+      align-items: start;
+    }
+    .contact-h {
+      font-family: var(--f-display);
+      font-size: clamp(2.25rem, 6vw, 4rem);
+      font-weight: 700;
+      letter-spacing: -0.035em;
+      line-height: 1;
+      color: var(--ink);
+      margin-bottom: 1.25rem;
+    }
+    .contact-h em { font-style: italic; color: var(--accent); }
+    .contact-sub {
+      font-size: 0.9375rem;
+      color: var(--ink-2);
+      max-width: 40ch;
+      line-height: 1.65;
+    }
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+      align-items: flex-end;
+      padding-top: 0.25rem;
+    }
+    .c-link {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--mist);
+      transition: color 0.2s;
+    }
+    .c-link:hover { color: var(--accent); }
+    .c-link svg { width: 15px; height: 15px; flex-shrink: 0; }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 2rem 0;
+      border-top: 1px solid var(--border);
+    }
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-copy {
+      font-family: var(--f-mono);
+      font-size: 0.68rem;
+      color: var(--mist);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 800px) {
+      .about-grid    { grid-template-columns: 1fr; }
+      .exp-item      { grid-template-columns: 1fr; gap: 0.75rem; }
+      .proj-grid     { grid-template-columns: 1fr; }
+      .skills-grid   { grid-template-columns: 1fr 1fr; gap: 2rem; }
+      .contact-grid  { grid-template-columns: 1fr; }
+      .contact-links { align-items: flex-start; }
+    }
+    @media (max-width: 540px) {
+      .skills-grid { grid-template-columns: 1fr; }
+      .nav-links   { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .dot { animation: none; }
+      *, *::before, *::after { transition-duration: 0.01ms !important; }
+    }
+    :focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav id="nav">
+  <div class="wrap nav-row">
+    <a href="#" class="nav-logo">RPG</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="mailto:ptrckgalinato@gmail.com" class="nav-cta">Get in touch</a>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section id="hero">
+  <div class="wrap">
+    <div class="hero-eyebrow">
+      <span class="dot"></span>
+      IT &amp; Cybersecurity Engineer · Security Operations
+    </div>
+    <h1 class="hero-name">Ronald Patrick<br><em>Galinato</em></h1>
+    <div class="hero-foot">
+      <p class="hero-role">
+        <strong>13 years</strong> securing IT infrastructure and digital assets — SIEM/XDR detection engineering,
+        incident response, and AI-assisted SecOps tooling.
+      </p>
+      <div class="hero-meta">
+        <span>Pasig City, Metro Manila, PH</span>
+        <span>ptrckgalinato@gmail.com</span>
+        <span>+63 966 439 0893</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ABOUT ── -->
+<section id="about">
+  <div class="wrap">
+    <p class="section-label">About</p>
+    <div class="about-grid">
+      <div>
+        <p class="about-lead">IT and Cybersecurity Engineer with 13 years across IT infrastructure and security operations, currently securing a digital-asset exchange.</p>
+        <p class="about-body">Experienced in SIEM/XDR detection engineering with Wazuh, cloud security on AWS, incident response, and security tool creation — including AI- and LLM-assisted SecOps tooling. Hands-on builder of detection pipelines, threat-intelligence aggregation, and incident response playbooks aligned to NIST SP 800-61 and ISO 27035.</p>
+        <p class="about-body">I've reduced mean time to detect and respond, strengthened SLA compliance, and operationalized threat detection across a regulated financial services environment.</p>
+      </div>
+      <div>
+        <div class="aside-group">
+          <div class="aside-label">Currently</div>
+          <div class="aside-value">Senior Associate, Security Engineering<br>Philippine Digital Asset Exchange (PDAX)</div>
+        </div>
+        <div class="aside-group">
+          <div class="aside-label">Education</div>
+          <div class="aside-value">B.S. Computer Engineering<br>Manuel L. Quezon University · 2013</div>
+        </div>
+        <div class="aside-group">
+          <div class="aside-label">Based in</div>
+          <div class="aside-value">Pasig City, Metro Manila<br>Philippines</div>
+        </div>
+        <div class="aside-group">
+          <div class="aside-label">Certifications</div>
+          <div class="cert-list">
+            <div class="cert-item">
+              CompTIA Security+
+              <span>CompTIA · 2025 – 2028</span>
+            </div>
+            <div class="cert-item">
+              AWS Certified Cloud Practitioner
+              <span>Amazon Web Services · 2025 – 2028</span>
+            </div>
+            <div class="cert-item">
+              EH:VAPT — Ethical Hacking
+              <span>GuideM Training Services</span>
+            </div>
+            <div class="cert-item">
+              Cisco Networking Bootcamp
+              <span>Ironlink</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── EXPERIENCE ── -->
+<section id="experience">
+  <div class="wrap">
+    <p class="section-label">Experience</p>
+    <div>
+
+      <div class="exp-item">
+        <div>
+          <div class="exp-period">Feb 2026 — Present</div>
+          <div class="exp-co">PDAX, Inc.</div>
+        </div>
+        <div>
+          <div class="exp-title">Senior Associate, Security Engineering</div>
+          <p class="exp-desc">Designed and deployed Wazuh SIEM/XDR, reducing MTTD/MTTR and strengthening SLA compliance. Engineered detection pipelines across JumpCloud, CrowdStrike Falcon, Trend Vision One, Google Workspace, AWS CloudTrail, GuardDuty, and internal tools. Built a 200+-source cyber threat intelligence aggregator with multi-factor scoring, managed 20+ incident lifecycles with managed-SOC coordination, and authored 9 IR playbooks aligned to NIST SP 800-61 and ISO 27035.</p>
+          <div class="tags">
+            <span class="tag">Wazuh SIEM/XDR</span>
+            <span class="tag">Detection Engineering</span>
+            <span class="tag">AWS</span>
+            <span class="tag">CrowdStrike Falcon</span>
+            <span class="tag">Threat Intelligence</span>
+            <span class="tag">Incident Response</span>
+            <span class="tag">LLM-assisted SecOps</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div>
+          <div class="exp-period">May 2019 — Feb 2025</div>
+          <div class="exp-co">Pacsports Phils., Inc.</div>
+        </div>
+        <div>
+          <div class="exp-title">IT Specialist — Security &amp; Infrastructure</div>
+          <p class="exp-desc">Led cybersecurity initiatives protecting assets and data across a multi-site network. Managed vulnerability remediation for 3 servers and 60+ endpoints. Deployed Cloudflare WAF to mitigate an active DDoS attack, restoring availability in under 30 minutes. Administered FortiGate NGFWs (IPS/IDS, web filtering) and Bitdefender GravityZone EPP, enforcing policies that blocked 15+ intrusion attempts weekly. Managed Active Directory for 30+ users and configured SSL/TLS and IPsec VPN tunnels for secure remote access.</p>
+          <div class="tags">
+            <span class="tag">FortiGate NGFW</span>
+            <span class="tag">Cloudflare WAF</span>
+            <span class="tag">IPsec VPN</span>
+            <span class="tag">Active Directory</span>
+            <span class="tag">Vulnerability Management</span>
+            <span class="tag">Bitdefender GravityZone</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div>
+          <div class="exp-period">Oct 2018 — Mar 2019</div>
+          <div class="exp-co">ZigZag Media Inc.</div>
+        </div>
+        <div>
+          <div class="exp-title">IT Service Engineer</div>
+          <p class="exp-desc">Configured and deployed VLANs and trunking to segment and secure the corporate network, improving isolation between business units and reducing lateral movement risk.</p>
+          <div class="tags">
+            <span class="tag">VLAN Segmentation</span>
+            <span class="tag">Network Trunking</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div>
+          <div class="exp-period">Jun 2017 — Oct 2018</div>
+          <div class="exp-co">Vivo Mobile Tech., Inc.</div>
+        </div>
+        <div>
+          <div class="exp-title">IT Support Staff</div>
+          <p class="exp-desc">Administered a FortiGate 200D UTM for an 80-user environment, implementing VLAN segmentation and maintaining 99% critical-server uptime.</p>
+          <div class="tags">
+            <span class="tag">FortiGate UTM</span>
+            <span class="tag">VLAN</span>
+            <span class="tag">Server Administration</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div>
+          <div class="exp-period">Aug 2014 — Nov 2016</div>
+          <div class="exp-co">C&amp;E Publishing Inc.</div>
+        </div>
+        <div>
+          <div class="exp-title">IT Support Staff</div>
+          <p class="exp-desc">Delivered nationwide IT support across multiple offices; managed MDaemon email servers, eScan antivirus, and Avaya phone systems.</p>
+          <div class="tags">
+            <span class="tag">MDaemon Email</span>
+            <span class="tag">Antivirus Management</span>
+            <span class="tag">Avaya</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div>
+          <div class="exp-period">Jun 2013 — Jul 2014</div>
+          <div class="exp-co">Accel Prime Tech., Inc.</div>
+        </div>
+        <div>
+          <div class="exp-title">Technical Assistant</div>
+          <p class="exp-desc">Assembled, serviced, and deployed computer hardware and peripherals for multiple corporate clients.</p>
+          <div class="tags">
+            <span class="tag">Hardware</span>
+            <span class="tag">IT Support</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── PROJECTS ── -->
+<section id="projects">
+  <div class="wrap">
+    <p class="section-label">Selected Work</p>
+    <div class="proj-grid">
+
+      <div class="proj-card">
+        <div class="proj-num">01</div>
+        <div class="proj-title">[Project Name]</div>
+        <p class="proj-desc">[One to two sentences — what the project does, who uses it, and why it matters. Focus on outcome, not implementation.]</p>
+        <div class="proj-foot">
+          <a href="#" class="proj-link">View project →</a>
+          <span class="proj-stack">Wazuh · Python</span>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-num">02</div>
+        <div class="proj-title">[Project Name]</div>
+        <p class="proj-desc">[One to two sentences. Keep descriptions parallel in structure — roughly the same length, outcome-focused.]</p>
+        <div class="proj-foot">
+          <a href="#" class="proj-link">View project →</a>
+          <span class="proj-stack">AWS · LLM</span>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-num">03</div>
+        <div class="proj-title">[Project Name]</div>
+        <p class="proj-desc">[What made this technically interesting or impactful? What scale did it reach?]</p>
+        <div class="proj-foot">
+          <a href="#" class="proj-link">View on GitHub →</a>
+          <span class="proj-stack">SIEM · Detection</span>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-num">04</div>
+        <div class="proj-title">[Project Name]</div>
+        <p class="proj-desc">[One to two sentences about the problem it solves and who it's for. Be specific.]</p>
+        <div class="proj-foot">
+          <a href="#" class="proj-link">View project →</a>
+          <span class="proj-stack">Threat Intel · API</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── SKILLS ── -->
+<section id="skills">
+  <div class="wrap">
+    <p class="section-label">Skills</p>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <h4>Detection &amp; Response</h4>
+        <div class="skill-list">
+          <div class="skill-item">Wazuh SIEM / XDR</div>
+          <div class="skill-item">Detection Rule Development</div>
+          <div class="skill-item">IoC &amp; Threat-Intel Enrichment</div>
+          <div class="skill-item">Incident Response (NIST 800-61)</div>
+          <div class="skill-item">Phishing &amp; Email Forensics</div>
+          <div class="skill-item">IR Playbook Development</div>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Cloud &amp; Endpoint</h4>
+        <div class="skill-list">
+          <div class="skill-item">AWS (EC2, S3, IAM, GuardDuty)</div>
+          <div class="skill-item">CrowdStrike Falcon EDR</div>
+          <div class="skill-item">Trend Micro Vision One</div>
+          <div class="skill-item">JumpCloud MDM</div>
+          <div class="skill-item">Cloudflare WAF / DDoS</div>
+          <div class="skill-item">Endpoint Hardening</div>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Network &amp; Offensive</h4>
+        <div class="skill-list">
+          <div class="skill-item">FortiGate NGFW (IPS/IDS)</div>
+          <div class="skill-item">IPsec / SSL VPN · OpenVPN</div>
+          <div class="skill-item">VLAN Segmentation</div>
+          <div class="skill-item">Nessus / OpenVAS / Nmap</div>
+          <div class="skill-item">Metasploit · Kali Linux</div>
+          <div class="skill-item">GRC · Jira · Confluence</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div>
+        <h2 class="contact-h">Let's work on<br>something <em>secure.</em></h2>
+        <p class="contact-sub">Whether it's a security engineering role, a consulting engagement, or a conversation about threat detection — I'm happy to connect.</p>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:ptrckgalinato@gmail.com" class="c-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+          ptrckgalinato@gmail.com
+        </a>
+        <a href="https://linkedin.com/in/patrick-galinato" class="c-link" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          linkedin.com/in/patrick-galinato
+        </a>
+        <a href="tel:+639664390893" class="c-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.55 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.46 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.4a16 16 0 0 0 6.07 6.07l.82-.82a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          +63 966 439 0893
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="wrap footer-row">
+    <span class="footer-copy">© 2026 Ronald Patrick Galinato</span>
+    <span class="footer-copy">Deployed on Vercel</span>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 24);
+  }, { passive: true });
+</script>
+
+</body>
+</html>

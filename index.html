@@ -333,61 +333,234 @@
       letter-spacing: 0.03em;
     }
 
-    /* ── PROJECTS ── */
-    .proj-grid {
+    /* ── PROJECTS (case-study accordion) ── */
+    .proj-intro {
+      font-size: 0.9375rem;
+      color: var(--ink-2);
+      line-height: 1.65;
+      max-width: 56ch;
+      margin-top: -1.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .cases {
+      border-top: 1px solid var(--border);
+    }
+    .case {
+      border-bottom: 1px solid var(--border);
+    }
+    .case-head {
+      width: 100%;
+      background: none;
+      border: 0;
+      cursor: pointer;
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2px;
-      background: var(--border);
-      outline: 2px solid var(--border);
+      grid-template-columns: 2.5rem 1fr auto;
+      align-items: baseline;
+      gap: 1.5rem;
+      padding: 1.75rem 0;
+      text-align: left;
+      font-family: inherit;
+      color: var(--ink);
+      transition: opacity 0.2s;
     }
-    .proj-card {
-      background: var(--bg);
-      padding: clamp(1.75rem, 4vw, 2.75rem);
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-      transition: background 0.18s;
-    }
-    .proj-card:hover { background: var(--bg-subtle); }
-    .proj-num {
+    .case-head:hover { opacity: 0.72; }
+    .case-num {
       font-family: var(--f-mono);
-      font-size: 0.68rem;
-      color: var(--mist);
-      letter-spacing: 0.08em;
+      font-size: 0.78rem;
+      color: var(--accent);
+      letter-spacing: 0.04em;
     }
-    .proj-title {
+    .case-heading { min-width: 0; }
+    .case-title, .case-sum, .case-tags { display: block; }
+    .case-tags { display: flex; }
+    .case-title {
       font-family: var(--f-display);
-      font-size: 1.375rem;
+      font-size: clamp(1.15rem, 2.6vw, 1.6rem);
       font-weight: 600;
       letter-spacing: -0.02em;
       line-height: 1.2;
       color: var(--ink);
+      margin-bottom: 0.4rem;
     }
-    .proj-desc {
+    .case-sum {
       font-size: 0.875rem;
       color: var(--ink-2);
-      line-height: 1.65;
-      flex: 1;
+      line-height: 1.55;
+      max-width: 62ch;
     }
-    .proj-foot {
+    .case-chev {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      color: var(--mist);
+      transition: transform 0.3s ease;
+      align-self: center;
+    }
+    .case-head[aria-expanded="true"] .case-chev { transform: rotate(180deg); }
+    .case-body {
+      overflow: hidden;
+      max-height: 0;
+      opacity: 0;
+      transition: max-height 0.45s ease, opacity 0.3s ease;
+    }
+    .case-body-inner {
+      padding: 0.5rem 0 3rem;
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      gap: clamp(2rem, 5vw, 4rem);
+      align-items: start;
+    }
+    .case-tags {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-top: 0.25rem;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-top: 0.9rem;
     }
-    .proj-link {
-      font-size: 0.8125rem;
-      font-weight: 600;
-      color: var(--accent);
-      transition: letter-spacing 0.2s;
-    }
-    .proj-card:hover .proj-link { letter-spacing: 0.02em; }
-    .proj-stack {
+
+    .star-block { margin-bottom: 1.6rem; }
+    .star-block:last-child { margin-bottom: 0; }
+    .star-label {
       font-family: var(--f-mono);
       font-size: 0.66rem;
-      color: var(--mist);
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.55rem;
     }
+    .star-block p {
+      font-size: 0.9375rem;
+      color: var(--ink-2);
+      line-height: 1.7;
+      max-width: 60ch;
+    }
+    .star-block p + p { margin-top: 0.7rem; }
+    .star-block b {
+      color: var(--ink);
+      font-weight: 600;
+    }
+    .star-block ul {
+      list-style: none;
+      margin-top: 0.6rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .star-block li {
+      position: relative;
+      padding-left: 1.1rem;
+      font-size: 0.9375rem;
+      color: var(--ink-2);
+      line-height: 1.6;
+      max-width: 60ch;
+    }
+    .star-block li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.6rem;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+    .case-note {
+      font-size: 0.82rem;
+      color: var(--mist);
+      line-height: 1.6;
+      padding: 0.85rem 1rem;
+      border-left: 2px solid var(--accent-warm);
+      background: var(--bg-subtle);
+      border-radius: 0 4px 4px 0;
+      margin-bottom: 1.6rem;
+      max-width: 60ch;
+    }
+
+    /* gallery */
+    .shots-wrap { position: sticky; top: 5rem; }
+    .shots-label {
+      font-family: var(--f-mono);
+      font-size: 0.66rem;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: var(--mist);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .shots-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+    .shots {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.6rem;
+    }
+    .shot {
+      display: block;
+      padding: 0;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      background: var(--surface);
+      cursor: zoom-in;
+      aspect-ratio: 4 / 3;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .shot:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+    .shot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top left;
+      display: block;
+    }
+
+    /* lightbox */
+    #lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(1rem, 4vw, 3rem);
+      background: rgba(6, 12, 24, 0.88);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+    #lightbox.open { display: flex; }
+    #lightbox img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      border-radius: 6px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    .lb-close {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.5rem;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.25);
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+      font-size: 1.25rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+    .lb-close:hover { background: rgba(255,255,255,0.18); }
 
     /* ── SKILLS ── */
     .skills-grid {
@@ -486,17 +659,22 @@
     }
 
     /* ── RESPONSIVE ── */
+    @media (max-width: 860px) {
+      .case-body-inner { grid-template-columns: 1fr; }
+      .shots-wrap      { position: static; }
+    }
     @media (max-width: 800px) {
       .about-grid    { grid-template-columns: 1fr; }
       .exp-item      { grid-template-columns: 1fr; gap: 0.75rem; }
-      .proj-grid     { grid-template-columns: 1fr; }
       .skills-grid   { grid-template-columns: 1fr 1fr; gap: 2rem; }
       .contact-grid  { grid-template-columns: 1fr; }
       .contact-links { align-items: flex-start; }
+      .case-head     { grid-template-columns: 2rem 1fr auto; gap: 1rem; }
     }
     @media (max-width: 540px) {
       .skills-grid { grid-template-columns: 1fr; }
       .nav-links   { display: none; }
+      .shots       { grid-template-columns: 1fr 1fr; }
     }
     @media (prefers-reduced-motion: reduce) {
       .dot { animation: none; }
@@ -711,51 +889,364 @@
 <section id="projects">
   <div class="wrap">
     <p class="section-label">Selected Work</p>
-    <div class="proj-grid">
+    <p class="proj-intro">Field case studies from securing multi-site enterprise networks — each written as Situation, Task, Action, and Result, with screenshots from the actual implementation. Click any project to expand.</p>
 
-      <div class="proj-card">
-        <div class="proj-num">01</div>
-        <div class="proj-title">[Project Name]</div>
-        <p class="proj-desc">[One to two sentences — what the project does, who uses it, and why it matters. Focus on outcome, not implementation.]</p>
-        <div class="proj-foot">
-          <a href="#" class="proj-link">View project →</a>
-          <span class="proj-stack">Wazuh · Python</span>
+    <div class="cases">
+
+      <!-- CASE 1 -->
+      <div class="case">
+        <button class="case-head" aria-expanded="false">
+          <span class="case-num">01</span>
+          <span class="case-heading">
+            <span class="case-title">Fortinet Firewall Configuration: Web &amp; Application Control</span>
+            <span class="case-sum">Multi-layered web filtering and QUIC blocking on FortiGate that cut recreational traffic and reduced network bandwidth usage by 20%.</span>
+            <span class="case-tags">
+              <span class="tag">FortiGate</span>
+              <span class="tag">Web Filtering</span>
+              <span class="tag">Application Control</span>
+              <span class="tag">QUIC Block</span>
+            </span>
+          </span>
+          <svg class="case-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="case-body">
+          <div class="case-body-inner">
+            <div>
+              <div class="star-block">
+                <div class="star-label">Situation</div>
+                <p>Management observed that employees were frequently accessing non-work-related websites — social media, gambling, and streaming platforms — during business hours. This behavior negatively affected productivity and consumed network bandwidth.</p>
+              </div>
+              <div class="star-block">
+                <div class="star-label">Task</div>
+                <p>Implement network restrictions to block these categories — enforcing company policy, minimizing productivity loss, and reducing the security risks associated with unverified websites.</p>
+              </div>
+              <div class="star-block">
+                <div class="star-label">Action</div>
+                <p>I implemented a multi-layered security approach on our FortiGate firewall:</p>
+                <ul>
+                  <li><b>Web Filtering:</b> Configured a new Web Filter profile to block Adult/Mature Content, Bandwidth-Consuming (Streaming), and General Interest – Personal (Social Media) categories.</li>
+                  <li><b>Application Control &amp; QUIC:</b> Built an Application Control profile targeting mobile apps, and blocked the QUIC protocol — forcing apps to fall back to standard TCP/HTTPS so the firewall can inspect and filter the traffic.</li>
+                  <li><b>Policy Implementation:</b> Applied both profiles to the main LAN-to-WAN policy, and verified NAT using the Outgoing Interface Address to mask internal IPs behind the WAN interface.</li>
+                </ul>
+              </div>
+              <div class="star-block">
+                <div class="star-label">Result</div>
+                <p>Distractions were significantly reduced, management reported a noticeable improvement in focused work hours, and network bandwidth usage dropped by 20%.</p>
+              </div>
+            </div>
+            <div class="shots-wrap">
+              <div class="shots-label">Screenshots</div>
+              <div class="shots">
+                <button class="shot"><img loading="lazy" src="images/p1/1-web-filtering-adult-1.png" alt="Web filter profile blocking adult content categories"></button>
+                <button class="shot"><img loading="lazy" src="images/p1/1-social-media.png" alt="Social media category blocking"></button>
+                <button class="shot"><img loading="lazy" src="images/p1/1-security-risk.png" alt="Security risk category configuration"></button>
+                <button class="shot"><img loading="lazy" src="images/p1/1-application-filter-1.png" alt="Application control profile"></button>
+                <button class="shot"><img loading="lazy" src="images/p1/1-firewall-policy-config-1.png" alt="Firewall policy configuration"></button>
+                <button class="shot"><img loading="lazy" src="images/p1/1-logs-1.png" alt="Traffic logs showing blocked requests"></button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="proj-card">
-        <div class="proj-num">02</div>
-        <div class="proj-title">[Project Name]</div>
-        <p class="proj-desc">[One to two sentences. Keep descriptions parallel in structure — roughly the same length, outcome-focused.]</p>
-        <div class="proj-foot">
-          <a href="#" class="proj-link">View project →</a>
-          <span class="proj-stack">AWS · LLM</span>
+      <!-- CASE 2 -->
+      <div class="case">
+        <button class="case-head" aria-expanded="false">
+          <span class="case-num">02</span>
+          <span class="case-heading">
+            <span class="case-title">Fortinet Policy Configuration: Departmental &amp; Management Segmentation</span>
+            <span class="case-sum">MAC-based address objects and per-department web-filter policies giving Marketing and Management controlled social-media access without loosening the general policy.</span>
+            <span class="case-tags">
+              <span class="tag">FortiGate</span>
+              <span class="tag">MAC Address Objects</span>
+              <span class="tag">Policy Segmentation</span>
+            </span>
+          </span>
+          <svg class="case-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="case-body">
+          <div class="case-body-inner">
+            <div>
+              <div class="star-block">
+                <div class="star-label">Situation</div>
+                <p>Specific departments required access to work-related websites that were previously restricted — for example, Marketing needed Instagram and other social media platforms.</p>
+              </div>
+              <div class="star-block">
+                <div class="star-label">Task</div>
+                <p>Configure a separate policy for the Management and Marketing departments to allow social media access, distinct from the restrictive General Policy.</p>
+              </div>
+              <div class="star-block">
+                <div class="star-label">Action</div>
+                <ul>
+                  <li>Created new address objects under <b>Policy &amp; Objects → Addresses</b> for VIP and Marketing devices, using MAC addresses to ensure persistent access even when IPs change via DHCP.</li>
+                  <li>Grouped these users according to their respective departments.</li>
+                  <li>Configured a custom Web Filter profile permitting traffic to social media and streaming sites.</li>
+                  <li>Created separate firewall policies for these address groups — applying the custom Web Filter and Application Control while retaining standard AV and IPS from the general internal network.</li>
+                </ul>
+              </div>
+              <div class="star-block">
+                <div class="star-label">Result</div>
+                <p>Marketing and VIP users now have secure, uninterrupted access to the social media and streaming platforms their roles require.</p>
+              </div>
+            </div>
+            <div class="shots-wrap">
+              <div class="shots-label">Screenshots</div>
+              <div class="shots">
+                <button class="shot"><img loading="lazy" src="images/p2/2-group.png" alt="Address group configuration"></button>
+                <button class="shot"><img loading="lazy" src="images/p2/2-social-media.png" alt="Custom web filter permitting social media"></button>
+                <button class="shot"><img loading="lazy" src="images/p2/2-youtube.png" alt="YouTube streaming access"></button>
+                <button class="shot"><img loading="lazy" src="images/p2/2-fw-policy.png" alt="Department firewall policy"></button>
+                <button class="shot"><img loading="lazy" src="images/p2/2-fw-policy-order.png" alt="Firewall policy ordering"></button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="proj-card">
-        <div class="proj-num">03</div>
-        <div class="proj-title">[Project Name]</div>
-        <p class="proj-desc">[What made this technically interesting or impactful? What scale did it reach?]</p>
-        <div class="proj-foot">
-          <a href="#" class="proj-link">View on GitHub →</a>
-          <span class="proj-stack">SIEM · Detection</span>
+      <!-- CASE 3 -->
+      <div class="case">
+        <button class="case-head" aria-expanded="false">
+          <span class="case-num">03</span>
+          <span class="case-heading">
+            <span class="case-title">Redundant IPSec &amp; SSL VPN for Real-Time POS Synchronization</span>
+            <span class="case-sum">IPSec primary tunnel with SSL-VPN failover and split tunneling, giving remote retail stores seamless, secure POS database sync and real-time sales reporting.</span>
+            <span class="case-tags">
+              <span class="tag">IPSec VPN</span>
+              <span class="tag">SSL-VPN Failover</span>
+              <span class="tag">Split Tunneling</span>
+              <span class="tag">FortiClient</span>
+            </span>
+          </span>
+          <svg class="case-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="case-body">
+          <div class="case-body-inner">
+            <div>
+              <div class="star-block">
+                <div class="star-label">Situation</div>
+                <p>The IT Department initiated an upgrade to the data synchronization process between the Head Office server and remote retail stores — the objective being a seamless, high-speed, secure channel for data in transit.</p>
+              </div>
+              <div class="star-block">
+                <div class="star-label">Task</div>
+                <p>Implement an IPSec VPN as the primary connectivity solution on Fortinet firewalls so remote stores could securely update their in-house POS databases, plus an SSL/TLS VPN as a failover in case of IPSec unavailability.</p>
+              </div>
+              <div class="star-block">
+                <div class="star-label">Action</div>
+                <ul>
+                  <li><b>Primary (IPSec):</b> Configured IPSec as the primary method, created local user accounts per store under <b>User &amp; Authentication → User Definition</b> in a dedicated group, and enabled split tunneling so only Head-Office-bound traffic uses the VPN.</li>
+                  <li><b>Backup (SSL-VPN):</b> Configured SSL-VPN on the primary WAN interface on a non-standard port to avoid HTTPS conflicts, defined an IP address pool, and created a firewall policy granting internal access.</li>
+                  <li><b>Endpoint:</b> Installed FortiClient VPN on store POS terminals using the Head Office public IP as the remote gateway — IPSec primary, SSL-VPN secondary.</li>
+                </ul>
+              </div>
+              <div class="star-block">
+                <div class="star-label">Result</div>
+                <p>Stores now enjoy seamless server access with automatic data synchronization. Inventory management is streamlined for inter-store stock transfers, and supervisors can view real-time sales reports — a significant improvement over the previous non-VPN method.</p>
+              </div>
+            </div>
+            <div class="shots-wrap">
+              <div class="shots-label">Screenshots</div>
+              <div class="shots">
+                <button class="shot"><img loading="lazy" src="images/p3/3-user-and-group.png" alt="Per-store user accounts"></button>
+                <button class="shot"><img loading="lazy" src="images/p3/3-grouped.png" alt="User group definition"></button>
+                <button class="shot"><img loading="lazy" src="images/p3/3-ipsec-config-2.png" alt="IPSec tunnel configuration"></button>
+                <button class="shot"><img loading="lazy" src="images/p3/3-split-tunneling.png" alt="Split tunneling setting"></button>
+                <button class="shot"><img loading="lazy" src="images/p3/3-ssl-vpn-address-pool.png" alt="SSL-VPN IP address pool"></button>
+                <button class="shot"><img loading="lazy" src="images/p3/3-tunnel-access-config.png" alt="Tunnel access configuration"></button>
+                <button class="shot"><img loading="lazy" src="images/p3/3-firewall-policy.png" alt="VPN firewall policy"></button>
+                <button class="shot"><img loading="lazy" src="images/p3/3-ipsec-end.png" alt="IPSec endpoint configuration"></button>
+                <button class="shot"><img loading="lazy" src="images/p3/3-ssl-end-1.png" alt="SSL-VPN endpoint configuration"></button>
+                <button class="shot"><img loading="lazy" src="images/p3/3-ipsec-connection.png" alt="Established IPSec connection"></button>
+                <button class="shot"><img loading="lazy" src="images/p3/3-ssl-connection-1.png" alt="Established SSL-VPN connection"></button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="proj-card">
-        <div class="proj-num">04</div>
-        <div class="proj-title">[Project Name]</div>
-        <p class="proj-desc">[One to two sentences about the problem it solves and who it's for. Be specific.]</p>
-        <div class="proj-foot">
-          <a href="#" class="proj-link">View project →</a>
-          <span class="proj-stack">Threat Intel · API</span>
+      <!-- CASE 4 -->
+      <div class="case">
+        <button class="case-head" aria-expanded="false">
+          <span class="case-num">04</span>
+          <span class="case-heading">
+            <span class="case-title">Incident Response: DDoS Mitigation &amp; WAF Tuning</span>
+            <span class="case-sum">Live DDoS attack mitigated with a Cloudflare WAF deployment and Under Attack Mode — website availability restored within 30 minutes.</span>
+            <span class="case-tags">
+              <span class="tag">Incident Response</span>
+              <span class="tag">Cloudflare WAF</span>
+              <span class="tag">DDoS Mitigation</span>
+            </span>
+          </span>
+          <svg class="case-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="case-body">
+          <div class="case-body-inner">
+            <div>
+              <p class="case-note">This narrative details a real-world incident I resolved. To protect the confidentiality of my previous employer, the screenshots and metrics shown here were reproduced in a controlled home-lab environment that replicates the original attack conditions and configuration.</p>
+              <div class="star-block">
+                <div class="star-label">Situation</div>
+                <p>The company website experienced a critical spike in resource usage, causing high latency and frequent 503 Service Unavailable errors. Investigation identified a DDoS attack based on three key IoCs: unusual traffic spikes, server resource exhaustion, and suspicious source IPs.</p>
+              </div>
+              <div class="star-block">
+                <div class="star-label">Task</div>
+                <p>Immediately stop or mitigate the active DDoS attack and restore the website's availability.</p>
+              </div>
+              <div class="star-block">
+                <div class="star-label">Action</div>
+                <ul>
+                  <li><b>Deployed Cloudflare:</b> Created a Cloudflare account to leverage its anti-DDoS capabilities.</li>
+                  <li><b>DNS Migration:</b> Imported the domain, scanned existing records, updated the registrar with Cloudflare nameservers, and set proxy status to Proxied to mask the origin IP.</li>
+                  <li><b>Emergency Mitigation:</b> Enabled Under Attack Mode to enforce a JavaScript browser challenge for all visitors, filtering malicious traffic.</li>
+                  <li><b>Security Tuning:</b> Enabled Bot Fight Mode, Browser Integrity Check to block fake user agents, and set the Minimum TLS Version to 1.3.</li>
+                </ul>
+              </div>
+              <div class="star-block">
+                <div class="star-label">Result</div>
+                <p>The incident was resolved within 30 minutes. The attack was mitigated using Cloudflare's infrastructure, restoring full access — and the site now benefits from improved load times and a stronger security posture against future threats.</p>
+              </div>
+            </div>
+            <div class="shots-wrap">
+              <div class="shots-label">Screenshots</div>
+              <div class="shots">
+                <button class="shot"><img loading="lazy" src="images/p4/setup-1.png" alt="Cloudflare account setup"></button>
+                <button class="shot"><img loading="lazy" src="images/p4/dns-records.png" alt="DNS records import"></button>
+                <button class="shot"><img loading="lazy" src="images/p4/under-attack.png" alt="Under Attack Mode enabled"></button>
+                <button class="shot"><img loading="lazy" src="images/p4/bot-fight.png" alt="Bot Fight Mode"></button>
+                <button class="shot"><img loading="lazy" src="images/p4/browser-check.png" alt="Browser Integrity Check"></button>
+                <button class="shot"><img loading="lazy" src="images/p4/tls.png" alt="Minimum TLS version 1.3"></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CASE 5 -->
+      <div class="case">
+        <button class="case-head" aria-expanded="false">
+          <span class="case-num">05</span>
+          <span class="case-heading">
+            <span class="case-title">VPN Hardening: Least Privilege &amp; Traffic Optimization for POS Systems</span>
+            <span class="case-sum">Zero-Trust rework restricting VPN access to a single POS port, with traffic shaping — eliminating unauthorized file-server access and improving sync speed by 10%.</span>
+            <span class="case-tags">
+              <span class="tag">Zero Trust</span>
+              <span class="tag">Least Privilege</span>
+              <span class="tag">Traffic Shaping</span>
+              <span class="tag">FortiGate</span>
+            </span>
+          </span>
+          <svg class="case-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="case-body">
+          <div class="case-body-inner">
+            <div>
+              <div class="star-block">
+                <div class="star-label">Situation</div>
+                <p>After deploying the corporate VPN, I observed unauthorized lateral movement from remote users. Store personnel were reaching the central server via UNC paths (SMB) to store personal files — treating a critical production server as common storage and introducing data-integrity risks, malware vectors, and accidental deletions.</p>
+              </div>
+              <div class="star-block">
+                <div class="star-label">Task</div>
+                <p>Enforce a Zero-Trust / Least-Privilege model for remote users:</p>
+                <ul>
+                  <li>Implement traffic shaping to guarantee bandwidth for POS transactions while mitigating tunnel saturation and DoS from compromised endpoints.</li>
+                  <li>Restrict VPN access strictly to business-critical POS connectivity.</li>
+                  <li>Block all unauthorized protocols (SMB, RDP, ICMP) to prevent file sharing and direct server access.</li>
+                </ul>
+              </div>
+              <div class="star-block">
+                <div class="star-label">Action</div>
+                <ul>
+                  <li><b>Requirement Analysis:</b> Worked with the dev team and confirmed the in-house POS app relies exclusively on TCP Port 1433 (SQL) for database sync.</li>
+                  <li><b>Service Object:</b> Created a FortiGate Service Object restricted to Port 1433 — whitelisting only POS traffic and implicitly denying everything else.</li>
+                  <li><b>Traffic Shaping:</b> Configured a High-Priority shaper for the POS service with a maximum bandwidth cap per user, a preventive control against bandwidth-based DoS.</li>
+                  <li><b>Policy Implementation:</b> Moved the POS-Only rule to the top of the sequence and disabled the legacy Allow-All rule permitting file access.</li>
+                  <li><b>Policy-Based Shaping:</b> Bound the priority rules to the VPN interface and POS service via a dedicated Traffic Shaping Policy.</li>
+                </ul>
+              </div>
+              <div class="star-block">
+                <div class="star-label">Result</div>
+                <p><b>Security:</b> Unauthorized file-server access via UNC paths was eliminated; all non-POS traffic (SMB, ping, RDP) is now blocked by default deny. <b>Performance:</b> POS traffic is prioritized over all other activity. <b>Efficiency:</b> Post-implementation testing showed a 10% improvement in data-sync speed from eliminating background noise.</p>
+              </div>
+            </div>
+            <div class="shots-wrap">
+              <div class="shots-label">Screenshots</div>
+              <div class="shots">
+                <button class="shot"><img loading="lazy" src="images/p5/new-service.png" alt="Port 1433 service object"></button>
+                <button class="shot"><img loading="lazy" src="images/p5/shaper.png" alt="Traffic shaper configuration"></button>
+                <button class="shot"><img loading="lazy" src="images/p5/fw-policy.png" alt="POS-only firewall policy"></button>
+                <button class="shot"><img loading="lazy" src="images/p5/order.png" alt="Firewall policy ordering"></button>
+                <button class="shot"><img loading="lazy" src="images/p5/shaper-policy.png" alt="Traffic shaping policy"></button>
+                <button class="shot"><img loading="lazy" src="images/p5/test.png" alt="Post-implementation speed test"></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CASE 6 -->
+      <div class="case">
+        <button class="case-head" aria-expanded="false">
+          <span class="case-num">06</span>
+          <span class="case-heading">
+            <span class="case-title">Defense-in-Depth Strategy via FortiGate IPS</span>
+            <span class="case-sum">Self-initiated Layer-7 IPS deployment with segmented sensors, Botnet C&amp;C blocking, and deep SSL inspection — proactively hardening the perimeter before any incident.</span>
+            <span class="case-tags">
+              <span class="tag">IPS / IDS</span>
+              <span class="tag">Defense in Depth</span>
+              <span class="tag">Deep SSL Inspection</span>
+              <span class="tag">Botnet C&amp;C</span>
+            </span>
+          </span>
+          <svg class="case-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="case-body">
+          <div class="case-body-inner">
+            <div>
+              <div class="star-block">
+                <div class="star-label">Situation</div>
+                <p>While operations were stable, our security posture — stateful Layer 3/4 firewall rules plus standard endpoint AV — was becoming insufficient against modern threats. With sophisticated ransomware and encrypted malware on the rise, I identified a visibility gap where malicious traffic could bypass perimeter defenses hidden inside legitimate allowed ports.</p>
+              </div>
+              <div class="star-block">
+                <div class="star-label">Task</div>
+                <p>On my own initiative, upgrade the network's defenses with a perimeter Intrusion Prevention System — moving beyond port-based filtering to Layer-7 inspection to detect and block malicious payloads and command-and-control callbacks, without waiting for an incident to force the change.</p>
+              </div>
+              <div class="star-block">
+                <div class="star-label">Action</div>
+                <ul>
+                  <li><b>Sensor Configuration:</b> Created distinct IPS sensors for Servers and Clients, using IPS Filters rather than manual signatures to automate discovery of new threats.</li>
+                  <li><b>Resource Optimization:</b> Defined specific Targets per profile (Server vs. Client) so the firewall only scans for relevant attacks, optimizing CPU usage.</li>
+                  <li><b>Botnet Mitigation:</b> Enabled Botnet C&amp;C and Malicious URL blocking to automatically cut connections from infected endpoints to known attacker servers.</li>
+                  <li><b>Network Segmentation:</b> Segregated firewall policies for Client PCs, Servers, and special workstations — identical baselines with unique IPS definitions per segment.</li>
+                  <li><b>Deep Packet Inspection:</b> Enabled Deep SSL Inspection on server policies and deployed the Fortinet CA certificate to trusted endpoints, so the engine inspects the payload, not just headers.</li>
+                  <li><b>Policy Ordering:</b> Placed the specific Server policy above the general internet policy so critical server traffic is matched and inspected with priority.</li>
+                </ul>
+              </div>
+              <div class="star-block">
+                <div class="star-label">Result</div>
+                <p>This self-initiated project established a proactive security layer that blocks network-based attacks standard AV often misses — reducing the attack surface by stopping lateral-movement attempts, and giving the IT team deep visibility into blocked threat traffic to keep the network hardened against evolving threats.</p>
+              </div>
+            </div>
+            <div class="shots-wrap">
+              <div class="shots-label">Screenshots</div>
+              <div class="shots">
+                <button class="shot"><img loading="lazy" src="images/p6/ips-servers.png" alt="Server IPS sensor"></button>
+                <button class="shot"><img loading="lazy" src="images/p6/ips-clients.png" alt="Client IPS sensor"></button>
+                <button class="shot"><img loading="lazy" src="images/p6/server-policy.png" alt="Server firewall policy with IPS"></button>
+                <button class="shot"><img loading="lazy" src="images/p6/pc-policy.png" alt="Client PC firewall policy"></button>
+                <button class="shot"><img loading="lazy" src="images/p6/order-1.png" alt="Policy ordering with server priority"></button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
     </div>
   </div>
 </section>
+
+<!-- lightbox overlay -->
+<div id="lightbox" role="dialog" aria-modal="true" aria-label="Enlarged screenshot">
+  <button class="lb-close" aria-label="Close">✕</button>
+  <img src="" alt="">
+</div>
 
 <!-- ── SKILLS ── -->
 <section id="skills">
@@ -838,6 +1329,65 @@
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 24);
   }, { passive: true });
+
+  /* ── case-study accordion ── */
+  document.querySelectorAll('.case-head').forEach((head) => {
+    const body = head.nextElementSibling;
+    head.addEventListener('click', () => {
+      const open = head.getAttribute('aria-expanded') === 'true';
+      if (open) {
+        body.style.maxHeight = null;
+        body.style.opacity = '0';
+        head.setAttribute('aria-expanded', 'false');
+      } else {
+        body.style.maxHeight = body.scrollHeight + 'px';
+        body.style.opacity = '1';
+        head.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+  // recalc open panels on resize (lazy images/reflow can change height)
+  let rt;
+  window.addEventListener('resize', () => {
+    clearTimeout(rt);
+    rt = setTimeout(() => {
+      document.querySelectorAll('.case-head[aria-expanded="true"]').forEach((head) => {
+        head.nextElementSibling.style.maxHeight = 'none';
+      });
+    }, 150);
+  }, { passive: true });
+
+  /* ── screenshot lightbox ── */
+  const lb = document.getElementById('lightbox');
+  const lbImg = lb.querySelector('img');
+  const lbClose = lb.querySelector('.lb-close');
+  let lastFocus = null;
+
+  function openLightbox(src, alt) {
+    lastFocus = document.activeElement;
+    lbImg.src = src;
+    lbImg.alt = alt || '';
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    lbClose.focus();
+  }
+  function closeLightbox() {
+    lb.classList.remove('open');
+    lbImg.src = '';
+    document.body.style.overflow = '';
+    if (lastFocus) lastFocus.focus();
+  }
+  document.querySelectorAll('.shot').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const img = btn.querySelector('img');
+      openLightbox(img.src, img.alt);
+    });
+  });
+  lbClose.addEventListener('click', closeLightbox);
+  lb.addEventListener('click', (e) => { if (e.target === lb) closeLightbox(); });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && lb.classList.contains('open')) closeLightbox();
+  });
 </script>
 
 </body>

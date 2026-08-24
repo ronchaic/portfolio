@@ -9,6 +9,16 @@
   <meta property="og:description" content="IT and Cybersecurity Engineer | Security Operations — Pasig City, Metro Manila.">
   <meta property="og:type" content="website">
 
+  <!-- apply saved theme before first paint to avoid flash -->
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('theme');
+        if (t === 'dark' || t === 'light') document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {}
+    })();
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -136,6 +146,36 @@
       white-space: nowrap;
     }
     .nav-cta:hover { border-color: var(--accent); color: var(--accent); }
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .theme-toggle {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: none;
+      color: var(--ink-2);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+    .theme-toggle svg { width: 17px; height: 17px; }
+    /* show moon in light mode (click → dark), sun in dark mode (click → light) */
+    .theme-toggle .icon-sun  { display: none; }
+    .theme-toggle .icon-moon { display: block; }
+    :root[data-theme="dark"] .theme-toggle .icon-sun  { display: block; }
+    :root[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) .theme-toggle .icon-sun  { display: block; }
+      :root:not([data-theme="light"]) .theme-toggle .icon-moon { display: none; }
+    }
 
     /* ── HERO ── */
     #hero {
@@ -562,6 +602,86 @@
     }
     .lb-close:hover { background: rgba(255,255,255,0.18); }
 
+    /* ── PROJECTS GRID ── */
+    .pgrid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+    .pcard {
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+      padding: 1.6rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .pcard:hover { border-color: var(--accent); transform: translateY(-3px); }
+    .pcard-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .pcard-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent-dim);
+      color: var(--accent);
+    }
+    .pcard-icon svg { width: 19px; height: 19px; }
+    .pcard-status {
+      font-family: var(--f-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mist);
+      padding: 0.3rem 0.6rem;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+    }
+    .pcard-title {
+      font-family: var(--f-display);
+      font-size: 1.2rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+    .pcard-desc {
+      font-size: 0.875rem;
+      color: var(--ink-2);
+      line-height: 1.6;
+      flex: 1;
+    }
+    .pcard .tags { margin-top: 0; }
+    .pcard-links {
+      display: flex;
+      gap: 1.25rem;
+      padding-top: 0.4rem;
+      border-top: 1px solid var(--border);
+      margin-top: 0.3rem;
+    }
+    .pcard-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--mist);
+      transition: color 0.2s;
+    }
+    .pcard-link:hover { color: var(--accent); }
+    .pcard-link[aria-disabled="true"] {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+    .pcard-link svg { width: 14px; height: 14px; }
+
     /* ── SKILLS ── */
     .skills-grid {
       display: grid;
@@ -670,11 +790,13 @@
       .contact-grid  { grid-template-columns: 1fr; }
       .contact-links { align-items: flex-start; }
       .case-head     { grid-template-columns: 2rem 1fr auto; gap: 1rem; }
+      .pgrid         { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 540px) {
       .skills-grid { grid-template-columns: 1fr; }
       .nav-links   { display: none; }
       .shots       { grid-template-columns: 1fr 1fr; }
+      .pgrid       { grid-template-columns: 1fr; }
     }
     @media (prefers-reduced-motion: reduce) {
       .dot { animation: none; }
@@ -692,14 +814,21 @@
 <!-- ── NAV ── -->
 <nav id="nav">
   <div class="wrap nav-row">
-    <a href="#" class="nav-logo">RPG</a>
+    <a href="#" class="nav-logo">pat.</a>
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#experience">Experience</a></li>
+      <li><a href="#work">Case Studies</a></li>
       <li><a href="#projects">Projects</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-    <a href="mailto:ptrckgalinato@gmail.com" class="nav-cta">Get in touch</a>
+    <div class="nav-actions">
+      <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch color theme" title="Switch theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <a href="mailto:ptrckgalinato@gmail.com" class="nav-cta">Get in touch</a>
+    </div>
   </div>
 </nav>
 
@@ -885,8 +1014,8 @@
   </div>
 </section>
 
-<!-- ── PROJECTS ── -->
-<section id="projects">
+<!-- ── CASE STUDIES ── -->
+<section id="work">
   <div class="wrap">
     <p class="section-label">Selected Work</p>
     <p class="proj-intro">Field case studies from securing multi-site enterprise networks — each written as Situation, Task, Action, and Result, with screenshots from the actual implementation. Click any project to expand.</p>
@@ -1248,6 +1377,99 @@
   <img src="" alt="">
 </div>
 
+<!-- ── PROJECTS ── -->
+<section id="projects">
+  <div class="wrap">
+    <p class="section-label">Projects</p>
+    <p class="proj-intro">Security tooling and side projects — detection utilities, automation, and lab builds. More coming soon; the entries below are placeholders to fill in.</p>
+
+    <div class="pgrid">
+
+      <!-- UPDATE: replace with a real project -->
+      <article class="pcard">
+        <div class="pcard-top">
+          <span class="pcard-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 7.7 8 9 4.6-1.3 8-4 8-9V5l-8-3z"/></svg>
+          </span>
+          <span class="pcard-status">Planned</span>
+        </div>
+        <h3 class="pcard-title">[Project Name]</h3>
+        <p class="pcard-desc">[One or two sentences — what it does, the problem it solves, and the scale or outcome. Keep it concrete.]</p>
+        <div class="tags">
+          <span class="tag">Python</span>
+          <span class="tag">Wazuh</span>
+          <span class="tag">Threat Intel</span>
+        </div>
+        <div class="pcard-links">
+          <a href="#" class="pcard-link" aria-disabled="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            Code
+          </a>
+          <a href="#" class="pcard-link" aria-disabled="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg>
+            Live
+          </a>
+        </div>
+      </article>
+
+      <!-- UPDATE: replace with a real project -->
+      <article class="pcard">
+        <div class="pcard-top">
+          <span class="pcard-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          </span>
+          <span class="pcard-status">Planned</span>
+        </div>
+        <h3 class="pcard-title">[Project Name]</h3>
+        <p class="pcard-desc">[One or two sentences. Keep the descriptions parallel in length and focus across cards.]</p>
+        <div class="tags">
+          <span class="tag">AWS</span>
+          <span class="tag">Automation</span>
+          <span class="tag">LLM</span>
+        </div>
+        <div class="pcard-links">
+          <a href="#" class="pcard-link" aria-disabled="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            Code
+          </a>
+          <a href="#" class="pcard-link" aria-disabled="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg>
+            Live
+          </a>
+        </div>
+      </article>
+
+      <!-- UPDATE: replace with a real project -->
+      <article class="pcard">
+        <div class="pcard-top">
+          <span class="pcard-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17l6-6-6-6M12 19h8"/></svg>
+          </span>
+          <span class="pcard-status">Planned</span>
+        </div>
+        <h3 class="pcard-title">[Project Name]</h3>
+        <p class="pcard-desc">[One or two sentences describing the project, its purpose, and who it's for.]</p>
+        <div class="tags">
+          <span class="tag">FortiGate</span>
+          <span class="tag">Detection</span>
+          <span class="tag">Dashboard</span>
+        </div>
+        <div class="pcard-links">
+          <a href="#" class="pcard-link" aria-disabled="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            Code
+          </a>
+          <a href="#" class="pcard-link" aria-disabled="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg>
+            Live
+          </a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
 <!-- ── SKILLS ── -->
 <section id="skills">
   <div class="wrap">
@@ -1329,6 +1551,22 @@
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 24);
   }, { passive: true });
+
+  /* ── theme toggle ── */
+  const themeBtn = document.getElementById('theme-toggle');
+  themeBtn.addEventListener('click', () => {
+    const root = document.documentElement;
+    const explicit = root.getAttribute('data-theme');
+    const current = explicit
+      || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    const next = current === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('theme', next); } catch (e) {}
+    // recalc any open accordion panels after the palette/reflow settles
+    document.querySelectorAll('.case-head[aria-expanded="true"]').forEach((h) => {
+      h.nextElementSibling.style.maxHeight = h.nextElementSibling.scrollHeight + 'px';
+    });
+  });
 
   /* ── case-study accordion ── */
   document.querySelectorAll('.case-head').forEach((head) => {

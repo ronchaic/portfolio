@@ -675,6 +675,15 @@
       transition: color 0.2s;
     }
     .pcard-link:hover { color: var(--accent); }
+    button.pcard-link {
+      background: none;
+      border: 0;
+      padding: 0;
+      cursor: pointer;
+      font: inherit;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
     .pcard-link[aria-disabled="true"] {
       opacity: 0.5;
       pointer-events: none;
@@ -1441,10 +1450,10 @@
           <span class="tag">nmap</span>
         </div>
         <div class="pcard-links">
-          <a href="https://github.com/ronchaic/Agentic-Pentester" class="pcard-link" target="_blank" rel="noopener noreferrer">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-            View on GitHub
-          </a>
+          <button type="button" class="pcard-link" data-shot="images/projects/vuln-scanner.png" data-shot-alt="AI-Powered Vulnerability Scanner — screenshot">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+            Screenshot Preview
+          </button>
         </div>
       </article>
 
@@ -1465,10 +1474,10 @@
           <span class="tag">AI / LLM</span>
         </div>
         <div class="pcard-links">
-          <a href="https://github.com/ronchaic/segs-secure-email-gateway" class="pcard-link" target="_blank" rel="noopener noreferrer">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-            View on GitHub
-          </a>
+          <button type="button" class="pcard-link" data-shot="images/projects/email-gateway.png" data-shot-alt="Secure Email Gateway and EML Analyzer — screenshot">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+            Screenshot Preview
+          </button>
         </div>
       </article>
 
@@ -1489,10 +1498,10 @@
           <span class="tag">AI / LLM</span>
         </div>
         <div class="pcard-links">
-          <a href="https://github.com/ronchaic/Cybersecurity-Pat/tree/main/MyOpenCTI" class="pcard-link" target="_blank" rel="noopener noreferrer">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-            View on GitHub
-          </a>
+          <button type="button" class="pcard-link" data-shot="images/projects/threat-intel.png" data-shot-alt="Threat Intelligence Platform — screenshot">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+            Screenshot Preview
+          </button>
         </div>
       </article>
 
@@ -1607,6 +1616,26 @@
     btn.addEventListener('click', () => {
       const img = btn.querySelector('img');
       openLightbox(img.src, img.alt);
+    });
+  });
+  // project-card "Screenshot Preview" buttons — open the lightbox if the
+  // screenshot exists, otherwise show a brief "coming soon" hint.
+  document.querySelectorAll('.pcard-link[data-shot]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const src = btn.dataset.shot;
+      const alt = btn.dataset.shotAlt || '';
+      const probe = new Image();
+      probe.onload = () => openLightbox(src, alt);
+      probe.onerror = () => {
+        if (btn.querySelector('.shot-hint')) return;
+        const hint = document.createElement('span');
+        hint.className = 'shot-hint';
+        hint.textContent = ' — coming soon';
+        hint.style.opacity = '0.6';
+        btn.appendChild(hint);
+        setTimeout(() => hint.remove(), 1800);
+      };
+      probe.src = src;
     });
   });
   lbClose.addEventListener('click', closeLightbox);

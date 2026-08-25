@@ -216,17 +216,11 @@
       letter-spacing: -0.035em;
       color: var(--ink);
       font-optical-sizing: auto;
-      margin-bottom: 2.5rem;
+      margin-bottom: 1.75rem;
     }
     .hero-name em {
       font-style: italic;
       color: var(--accent);
-    }
-    .hero-foot {
-      display: grid;
-      grid-template-columns: 1fr 340px;
-      gap: clamp(2.5rem, 7vw, 5.5rem);
-      align-items: end;
     }
     .hero-role {
       font-size: clamp(0.9375rem, 2vw, 1.125rem);
@@ -236,13 +230,16 @@
     }
     .hero-role strong { color: var(--ink); font-weight: 600; }
     .hero-meta {
-      display: flex;
-      flex-direction: column;
       font-family: var(--f-mono);
       font-size: 0.72rem;
       color: var(--mist);
-      line-height: 1.9;
-      text-align: left;
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+    .hero-meta span + span::before {
+      content: "|";
+      margin: 0 0.65rem;
+      color: var(--border);
     }
 
     /* ── SECTION CHROME ── */
@@ -785,7 +782,6 @@
       .shots-wrap      { position: static; }
     }
     @media (max-width: 800px) {
-      .hero-foot     { grid-template-columns: 1fr; gap: 1.75rem; }
       .about-grid    { grid-template-columns: 1fr; }
       .exp-item      { grid-template-columns: 1fr; gap: 0.75rem; }
       .skills-grid   { grid-template-columns: 1fr 1fr; gap: 2rem; }
@@ -842,17 +838,15 @@
       IT &amp; Cybersecurity Engineer · Security Operations
     </div>
     <h1 class="hero-name">Ronald Patrick<br><em>Galinato</em></h1>
-    <div class="hero-foot">
-      <p class="hero-role">
-        <strong>13 years</strong> securing IT infrastructure and digital assets — SIEM/XDR detection engineering,
-        incident response, and AI-assisted SecOps tooling.
-      </p>
-      <div class="hero-meta">
-        <span>Pasig City, Metro Manila, PH</span>
-        <span>ptrckgalinato@gmail.com</span>
-        <span>+63 966 439 0893</span>
-      </div>
+    <div class="hero-meta">
+      <span>Pasig City, Metro Manila, PH</span>
+      <span>ptrckgalinato@gmail.com</span>
+      <span>+63 966 439 0893</span>
     </div>
+    <p class="hero-role">
+      <strong>13 years</strong> securing IT infrastructure and digital assets — SIEM/XDR detection engineering,
+      incident response, and AI-assisted SecOps tooling.
+    </p>
   </div>
 </section>
 

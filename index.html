@@ -223,16 +223,15 @@
       color: var(--accent);
     }
     .hero-foot {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 2rem;
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: clamp(2.5rem, 7vw, 5.5rem);
+      align-items: end;
     }
     .hero-role {
       font-size: clamp(0.9375rem, 2vw, 1.125rem);
       color: var(--ink-2);
-      max-width: 480px;
+      max-width: 52ch;
       line-height: 1.55;
     }
     .hero-role strong { color: var(--ink); font-weight: 600; }
@@ -243,7 +242,7 @@
       font-size: 0.72rem;
       color: var(--mist);
       line-height: 1.9;
-      text-align: right;
+      text-align: left;
     }
 
     /* ── SECTION CHROME ── */
@@ -786,6 +785,7 @@
       .shots-wrap      { position: static; }
     }
     @media (max-width: 800px) {
+      .hero-foot     { grid-template-columns: 1fr; gap: 1.75rem; }
       .about-grid    { grid-template-columns: 1fr; }
       .exp-item      { grid-template-columns: 1fr; gap: 0.75rem; }
       .skills-grid   { grid-template-columns: 1fr 1fr; gap: 2rem; }
